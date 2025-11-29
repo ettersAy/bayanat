@@ -26,7 +26,7 @@ class QueryPanel(ttk.Frame):
         query_frame = ttk.LabelFrame(self, text="SQL Query", padding="10")
         query_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
         
-        # Toolbar for query (optional, just the button for now)
+        # Toolbar
         toolbar = ttk.Frame(query_frame)
         toolbar.pack(fill=tk.X, pady=(0, 5))
         
@@ -43,7 +43,7 @@ class QueryPanel(ttk.Frame):
         self.result_notebook = ttk.Notebook(result_frame)
         self.result_notebook.pack(fill=tk.BOTH, expand=True)
         
-        # Tab 1: Table View (Default)
+        # Tab 1: Table View
         self.tab_table = ttk.Frame(self.result_notebook)
         self.result_notebook.add(self.tab_table, text="Table")
         
@@ -60,6 +60,9 @@ class QueryPanel(ttk.Frame):
         
         self.table_scroll_y.config(command=self.result_tree.yview)
         self.table_scroll_x.config(command=self.result_tree.xview)
+
+        # Bind Ctrl+C for copying
+        self.result_tree.bind("<Control-c>", self.copy_from_table)
 
         # Tab 2: Text View
         self.tab_text = ttk.Frame(self.result_notebook)
@@ -80,6 +83,24 @@ class QueryPanel(ttk.Frame):
 
     def handle_connect(self):
         self.on_connect()
+
+    def copy_from_table(self, event):
+        selection = self.result_tree.selection()
+        if not selection:
+            return
+            
+        rows_data = []
+        for item_id in selection:
+            values = self.result_tree.item(item_id, "values")
+            # Convert to tab-separated string
+            row_str = "\t".join(map(str, values))
+            rows_data.append(row_str)
+            
+        text_to_copy = "\n".join(rows_data)
+        
+        self.clipboard_clear()
+        self.clipboard_append(text_to_copy)
+        self.status_callback(f"Copied {len(selection)} rows to clipboard.")
 
     def run_query(self):
         query = self.query_text.get("1.0", tk.END).strip()
@@ -110,7 +131,7 @@ class QueryPanel(ttk.Frame):
                 for row in rows:
                     self.result_tree.insert("", tk.END, values=row)
                 
-                # Update Text View (optional, but good for copy-paste)
+                # Update Text View
                 self.update_text_view(columns, rows)
                 
                 self.result_notebook.select(self.tab_table)

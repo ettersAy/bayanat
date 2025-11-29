@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Bayanat
+Comment=Lightweight PostgreSQL Client
+Exec=python3 /var/my-apps/bayanat/main.py
+Path=/var/my-apps/bayanat
+Icon=/var/my-apps/bayanat/img/database-file.png
+Terminal=false
+Type=Application
+Categories=Development;Database;
