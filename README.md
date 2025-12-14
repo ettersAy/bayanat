@@ -15,37 +15,43 @@ In a world of heavy, web-based desktop apps, Bayanat stands out by being **nativ
 
 ### Key Advantages
 
-*   **Ultra Lightweight**: Runs comfortably on any hardware, consuming minimal system resources.
-*   **Zero Bloat**: No embedded web browser, no tracking, no background services.
-*   **Focused Workflow**: A clean interface that puts your data and queries front and center.
-*   **Native Performance**: Snappy UI interactions with no input lag.
+* **Ultra Lightweight**: Runs comfortably on any hardware, consuming minimal system resources.
+* **Zero Bloat**: No embedded web browser, no tracking, no background services.
+* **Focused Workflow**: A clean interface that puts your data and queries front and center.
+* **Native Performance**: Snappy UI interactions with no input lag.
 
 ## ✨ Features
 
-*   **Connection Management**: Connect to any PostgreSQL database (supports Neon.tech, AWS RDS, local, etc.). Remembers your last connection.
-*   **Table Explorer**: Quickly browse tables in the `public` schema.
-    *   View column names, data types, and constraints (Primary Keys, Not Null).
-*   **Query Editor**: Multi-line SQL editor for writing complex queries.
-*   **Dual Result Views**:
-    *   **Table View**: Structured, scrollable grid for `SELECT` results.
-    *   **Text View**: Plain text output for easy copying or viewing logs/errors.
-*   **Status Bar**: Real-time feedback on connection status and query execution.
+* **Connection Management**: Connect to any PostgreSQL database (supports Neon.tech, AWS RDS, local, etc.). Remembers your last connection.
+  * **Docker Support**: Fully compatible with PostgreSQL running in local Docker containers.
+    * Example: `postgresql://app_user:app_password@localhost:5432/db_name` (using `localhost` to access mapped ports).
+* **Table Explorer**: Quickly browse tables in the `public` schema.
+  * View column names, data types, and constraints (Primary Keys, Not Null).
+* **Query Editor**: Multi-line SQL editor for writing complex queries.
+* **Dual Result Views**:
+  * **Table View**: Structured, scrollable grid for `SELECT` results.
+  * **Text View**: Plain text output for easy copying or viewing logs/errors.
+* **Status Bar**: Real-time feedback on connection status and query execution.
 
 ## 🛠️ Installation & Run
 
 ### Prerequisites
-*   Python 3.x
-*   `psycopg2` library
+
+* Python 3.x
+* `psycopg2` library
 
 ### Setup
 
-1.  **Install Dependencies**:
+1. **Install Dependencies**:
+
     ```bash
     pip install psycopg2-binary
     ```
+
     *(Note: On some Linux systems, you might need `sudo apt install python3-tk` if it's not pre-installed).*
 
-2.  **Run the App**:
+2. **Run the App**:
+
     ```bash
     python3 main.py
     ```
@@ -54,7 +60,7 @@ In a world of heavy, web-based desktop apps, Bayanat stands out by being **nativ
 
 The project is structured for maintainability while keeping it simple:
 
-*   `main.py`: Entry point.
-*   `app/database.py`: Handles all PostgreSQL connections and queries.
-*   `app/ui/`: Contains the user interface components (Sidebar, Query Panel, Main Window).
-*   `app/config.py`: Manages persistent configuration (connection strings).
+* `main.py`: Entry point.
+* `app/database.py`: Handles all PostgreSQL connections and queries.
+* `app/ui/`: Contains the user interface components (Sidebar, Query Panel, Main Window).
+* `app/config.py`: Manages persistent configuration (connection strings).
